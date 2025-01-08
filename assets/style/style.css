@@ -1,0 +1,178 @@
+* {
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    height: 100vh;
+    background-image: var(--bg-secundary);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Jag har valt att använda mig av :root för att enklare ge mig kontrollen att ändra färger om jag under kodandets gång märker att det inte blev snyggt
+    Dessutom slipper jag reppetera mig med samma färgkod om och om igen då jag endast behöver ge attributet en gång dvs --bg-primary.
+*/
+:root {
+    /* Grupp med variablar för färgsättning av text*/
+    --text-primary: black;
+    --text-secundary: rgb(252, 252, 252);
+
+    /*Grupp med variablar för färgsättning av "Foreground"*/
+    --fg-primary: ;
+    --fg-primary-hover: ;
+    --fg-primary-active: ;
+
+    /* Foreground Secundary */
+    --fg-secundary: rgb(143, 216, 245);
+    --fg-secundary-hover:rgb(107, 162, 184) ; 
+    --fg-secundary-active:rgb(57, 87, 99) ;
+
+     /* Clicker */
+    --fg-clicker: ;
+    --fg-clicker-hover: ;
+    --fg-clicker-active: ;
+
+    /*Grupp med variablar för färgsättning av "Background"*/
+    --bg-primary: url("../img/wood.webp");
+    --bg-secundary: url("../img/wonderland.webp");
+
+}
+#wrapper{
+    display: grid;
+    gap: 100px;
+    grid-template-rows: 10% 2fr 20%;
+    justify-content: center;
+    grid-template-areas: 
+    "inve"
+    "clck"
+    "stor"
+    ;
+    
+}
+#clicker-wrapper{
+    grid-area:  clck;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+#clicker-object{
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: 100ms;
+}
+#clicker-object img{
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    transform: scaleY(1.05) scaleX(1.2);
+}
+
+#clicker-object:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+#clicker-object:active{
+    cursor: pointer;
+    transform: scale(0.95);
+}
+
+/* Förråd*/
+#inventory{
+    display: grid;
+    color: var(--text-secundary);
+
+    background-color: rgb(2, 92, 119);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    grid-template-columns: 1fr 1fr;
+    grid-area: inve;
+    padding: 5px;
+    border-radius: 2px;
+
+    grid-template-areas: 
+        "purs stor"
+    ;
+
+    font-size: xx-large;
+    font-weight: bolder;
+    
+}
+#purse{
+    margin-left: 10px;
+    grid-area: purs;
+    user-select: none;
+
+}
+#storage{
+    display: flex;
+    gap: 10px;
+    grid-area: stor;
+    user-select: none;
+}
+
+/* Butiksdelen */
+#store{
+    display: flex;
+    padding: 25px;
+
+    font-size: larger;
+    font-weight: bold;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+    background-image: var(--bg-primary);
+
+    grid-area: stor;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    
+}
+
+.button {
+    display: flex;
+    font-size: large;
+    gap: 10px;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: var(--fg-secundary) ;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.button:hover {
+ cursor: pointer;
+ background-color: var(--fg-secundary-hover);
+}
+.button:active{
+    background-color: var(--fg-secundary-active);
+}
+.button img{
+    height: 70px;
+}
+
+@media (max-width:750px) {
+    #clicker-object{
+        width: 450px;
+    }
+
+}
+
+@media (max-width:550px) {
+    #clicker-object{
+        width: 250px;
+    }
+
+}
