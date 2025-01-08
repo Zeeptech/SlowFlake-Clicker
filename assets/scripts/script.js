@@ -94,9 +94,6 @@ function buyAutoClicker(typeIndex) {
         updateMoney();
         console.log(`Bought a ${type.name} Owned: ${type.owned}`);
 
-        
-    
-
         } else {
         console.log("Not enough money to buy this Upgrade!.");
     }
@@ -116,7 +113,6 @@ function updateStorage(type){
         icon.src = type.icon;
         icon.style.width = "30px";
         icon.style.height = "30px";
-        
         const text = document.createElement("span");
         text.innerText = `x${type.owned}`
 
