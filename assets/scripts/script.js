@@ -1,6 +1,6 @@
 let money = 0;
-let displayMoney = document.getElementById("purse");
-const CLICKSPEED = .1;
+const displayMoney = document.getElementById("purse");
+const CLICKSPEED = 1000;
 
 
 
@@ -61,21 +61,29 @@ const store = document.getElementById("store");
 autoClickerTypes.forEach((type, index) => {
     const button = document.createElement("div");
     const icon = document.createElement("img");
-    const text = document.createElement("span");
+    const textWrapper = document.createElement("span");
+    textWrapper.display = "grid";
+    const text = document.createElement("div");
 
+    const price = document.createElement("div");
     icon.src = type.icon;
     button.className = "button"; 
     button.style.userSelect = "none"
     icon.style.pointerEvents = "none";
-    text.innerText = `Buy ${type.name}: ${type.getPrice().toLocaleString("en-US")}`;
+    text.innerText = `Buy ${type.name}:`; 
+    price.innerText = `${type.getPrice().toLocaleString("en-US")}`;
 
     button.addEventListener("click", () => {
         buyAutoClicker(index); 
-        text.innerText = `Buy ${type.name}: ${type.getPrice().toLocaleString("en-US")}`;
+        price.innerText = `${type.getPrice().toLocaleString("en-US")}`;
     });
 
-    button.appendChild(text);
+    textWrapper.appendChild(text);
+    textWrapper.appendChild(price);
+
+    button.appendChild(textWrapper);
     button.appendChild(icon);
+
     store.appendChild(button);
 
 });

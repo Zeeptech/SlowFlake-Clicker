@@ -39,16 +39,13 @@ html{
 
 }
 #wrapper{
-    display: grid;
-    gap: 100px;
-    grid-template-rows: 10% 2fr 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+    gap: 150px;
+    grid-template-rows: auto 1fr auto;
     justify-content: center;
-    grid-template-areas: 
-    "inve"
-    "clck"
-    "stor"
-    ;
-    
 }
 #clicker-wrapper{
     grid-area:  clck;
@@ -84,21 +81,17 @@ html{
 
 /* Förråd*/
 #inventory{
-    display: grid;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
     color: var(--text-secundary);
 
     background-color: rgb(2, 92, 119);
     background-repeat: no-repeat;
     background-size: cover;
-    
-    grid-template-columns: 1fr 1fr;
-    grid-area: inve;
+
     padding: 5px;
     border-radius: 2px;
-
-    grid-template-areas: 
-        "purs stor"
-    ;
 
     font-size: xx-large;
     font-weight: bolder;
@@ -106,12 +99,13 @@ html{
 }
 #purse{
     margin-left: 10px;
-    grid-area: purs;
+    
     user-select: none;
 
 }
 #storage{
     display: flex;
+
     gap: 10px;
     grid-area: stor;
     user-select: none;
@@ -120,27 +114,28 @@ html{
 /* Butiksdelen */
 #store{
     display: flex;
-    padding: 25px;
-
+    width: 100%;
+    padding: 20px;
     font-size: larger;
     font-weight: bold;
 
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 5px;
+    
     background-image: var(--bg-primary);
 
     grid-area: stor;
     align-items: center;
     align-content: center;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
     
 }
 
 .button {
     display: flex;
+    justify-content: start;
     font-size: large;
     gap: 10px;
     flex-direction: row-reverse;
@@ -163,16 +158,27 @@ html{
     height: 70px;
 }
 
-@media (max-width:750px) {
+@media (max-width:1920px) {
     #clicker-object{
-        width: 450px;
+        width: 420px;
+        margin-top: unset;
+        margin-bottom: unset;
+        
     }
+
+}
+
+@media (max-width:750px) {
+    #inventory{
+        flex-direction: column;
+    }
+
 
 }
 
 @media (max-width:550px) {
     #clicker-object{
-        width: 250px;
+        width: 350px;
     }
 
 }
