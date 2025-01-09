@@ -6,9 +6,14 @@
 }
 html{
     height: 100vh;
+    
     background-image: var(--bg-secundary);
     background-repeat: no-repeat;
     background-size: cover;
+}
+body{
+    
+    height: 100%;
 }
 /* Jag har valt att använda mig av :root för att enklare ge mig kontrollen att ändra färger om jag under kodandets gång märker att det inte blev snyggt
     Dessutom slipper jag reppetera mig med samma färgkod om och om igen då jag endast behöver ge attributet en gång dvs --bg-primary.
@@ -39,6 +44,7 @@ html{
 
 }
 #wrapper{
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -59,7 +65,7 @@ html{
 #clicker-object{
     width: 600px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     transition: 100ms;
 }
 #clicker-object img{
@@ -115,6 +121,7 @@ html{
 #store{
     display: flex;
     width: 100%;
+    height: 254px;
     padding: 20px;
     font-size: larger;
     font-weight: bold;
@@ -163,6 +170,11 @@ html{
         width: 420px;
         margin-top: unset;
         margin-bottom: unset;
+        
+    }
+
+    #store{
+        height: auto;
         
     }
 
