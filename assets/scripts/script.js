@@ -48,7 +48,7 @@ class ClickerType {
 
 //Array med Vilka typer av autoclicker du kan köpa
 const ClickerTypes = [
-    new ClickerType("Pointer", 0, 1, 3, "upgrade", "assets/img/pointer.svg"),
+    new ClickerType("Pointer", 0, 50, 2.5, "upgrade", "assets/img/pointer.svg"),
     new ClickerType("Snow mittens", .3, 10, 1.4, "auto", "assets/img/mitten.svg"),
     new ClickerType("Shovel", 1, 40, 1.5, "auto", "assets/img/shovel.svg"),
     new ClickerType("Snow Mobile", 3, 500, 1.6, "auto", "assets/img/snowmobile.svg"),
@@ -64,11 +64,11 @@ function buyUpgradeClick(typeIndex){
     if (money >= price) {
         money -= price;
         type.owned++;
-        moneyPerClick++;
+        moneyPerClick *= 2;
         
         updateStorage(type);
         updateMoney();
-        console.log(`Bought a ${type.name} Owned: ${type.owned}`);
+        console.log(`Upgraded ${type.name} ${type.owned} times`);
 
         } else {
         console.log("Not enough money to buy this Upgrade!.");
@@ -93,11 +93,6 @@ function buyAutoClicker(typeIndex) {
         console.log("Not enough money to buy this Upgrade!.");
     }
   };
-
-
-
-// Autoclicker
-
 
 
 // Butik för Autoklickers
@@ -166,8 +161,7 @@ function updateStorage(type){
         storageItem.appendChild(text);
         storage.appendChild(storageItem);
     } else {
-        // Uppdatera endast antalet om objektet redan finns
-        const count = storageItem.querySelector("span"); // Hitta <span> för att uppdatera antalet
+        const count = storageItem.querySelector("span");
         if (count) {
             count.innerText = `x${type.owned}`;
         }
