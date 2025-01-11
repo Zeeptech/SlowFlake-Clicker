@@ -1,6 +1,7 @@
 let money = 0;
 const displayMoney = document.getElementById("purse");
 const CLICKSPEED = 1;
+const SNOWFALLAMOUNT = 50; 
 let moneyPerClick = 1;
 
 
@@ -10,6 +11,7 @@ const clicker = document.getElementById("clicker-object");
 clicker.addEventListener("click", (event) => {
     money+= moneyPerClick;
     createFloatingText(moneyPerClick, event.clientX, event.clientY);
+    createSnowFall();
     updateMoney();
 });
 
@@ -29,13 +31,11 @@ class ClickerType {
         this.owned = 0;
     }
 
-    
     getPrice() {
         return Math.floor(this.basePrice * Math.pow(this.multiplier, this.owned));
 
     }
 
-    
     startAuto() {
         setInterval(() => {
         money += this.clicksPerSec * this.owned;
@@ -169,8 +169,9 @@ function updateStorage(type){
 
 };
 
-function createFloatingText(text, x, y) {
+function createFloatingText(text, x, y){
     const floatingText = document.createElement("div");
+
     floatingText.innerText = `+${text}`;
     floatingText.style.position = "absolute";
     floatingText.style.left = `${x}px`;
@@ -197,6 +198,53 @@ function createFloatingText(text, x, y) {
     }, 1000);
 };
 
+function createSnowFall(){
+    const snowFall = document.createElement("img");
+    const snowFallContainer = document.getElementById("snowFallContainer");
 
+    const snowFlakes = [
+        "assets/img/snowflake1.svg",
+        "assets/img/snowflake2.svg",
+        "assets/img/snowflake3.svg"
+    ];
+    const randomIndex = Math.floor(Math.random(1) *snowFlakes.length);
+    const randomSize = Math.random() * 20 + 10; 
+    const randomX = Math.floor(Math.random() * snowFallContainer.offsetWidth) - randomSize;
+    const fallDuration = Math.random() * 10 + 5;
+
+    snowFall.src = snowFlakes[randomIndex];
+    snowFall.style.position = "absolute";
+    snowFall.style.left =`${randomX}px`;
+    snowFall.style.top = `10px`;
+    snowFall.style.height = `${randomSize}px`;
+    snowFall.style.width = `${randomSize}px`
+    snowFall.style.pointerEvents ="none";
+    snowFall.style.transition = `transform ${fallDuration}s linear, opacity ${fallDuration}s ease-out`;
+
+    snowFallContainer.appendChild(snowFall);
+
+    console.log(randomIndex);
+    console.log(randomX);
+    
+    setTimeout(() => {
+        snowFall.style.transform = `translateY(${window.innerHeight - 10}px)`; // Falla utanför skärmen
+        snowFall.style.opacity = "0";
+    }, 10);
+
+    // Ta bort snöflingan från DOM när animationen är klar
+    setTimeout(() => {
+        createSnowFall();
+        snowFall.remove();
+    }, fallDuration * 1000);
+
+}
+// Testar snöfall 
+for (let i = 0; i < SNOWFALLAMOUNT; i++) {
+    
+    setTimeout( ()=>{
+        createSnowFall();
+    }, i*520);
+    
+};
 
 updateMoney();
