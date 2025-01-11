@@ -7,8 +7,9 @@ let moneyPerClick = 1;
 // Clicker-Element
 const clicker = document.getElementById("clicker-object");
 
-clicker.addEventListener("click", () => {
+clicker.addEventListener("click", (event) => {
     money+= moneyPerClick;
+    createFloatingText(moneyPerClick, event.clientX, event.clientY);
     updateMoney();
 });
 
@@ -141,35 +142,6 @@ function generateButton(type, index){
 
 ClickerTypes.forEach((type, index) => {
     generateButton(type, index, buyAutoClicker)
-
-    /*
-    const button = document.createElement("div");
-    const icon = document.createElement("img");
-    const textWrapper = document.createElement("span");
-    textWrapper.display = "grid";
-    const text = document.createElement("div");
-
-    const price = document.createElement("div");
-    icon.src = type.icon;
-    button.className = "button"; 
-    button.style.userSelect = "none"
-    icon.style.pointerEvents = "none";
-    text.innerText = `Buy ${type.name}:`; 
-    price.innerText = `${type.getPrice().toLocaleString("en-US")}`;
-
-    button.addEventListener("click", () => {
-        buyAutoClicker(index); 
-        price.innerText = `${type.getPrice().toLocaleString("en-US")}`;
-    });
-
-    textWrapper.appendChild(text);
-    textWrapper.appendChild(price);
-
-    button.appendChild(textWrapper);
-    button.appendChild(icon);
-
-    store.appendChild(button);
-*/
 });
 
 
@@ -202,6 +174,35 @@ function updateStorage(type){
     };
 
 };
+
+function createFloatingText(text, x, y) {
+    const floatingText = document.createElement("div");
+    floatingText.innerText = `+${text}`;
+    floatingText.style.position = "absolute";
+    floatingText.style.left = `${x}px`;
+    floatingText.style.top = `${y-20}px`;
+    floatingText.style.fontSize = "16px";
+    floatingText.style.fontWeight = "bold";
+    floatingText.style.color = "white";
+    floatingText.style.textShadow = "0 0 5px black";
+    floatingText.style.pointerEvents = "none";
+    floatingText.style.opacity = "1";
+    floatingText.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+
+    document.body.appendChild(floatingText);
+
+    // Vänta en liten stund och animera
+    setTimeout(() => {
+        floatingText.style.transform = "translateY(-50px)";
+        floatingText.style.opacity = "0";
+    }, 10);
+
+    // Ta bort texten efter animationen
+    setTimeout(() => {
+        floatingText.remove();
+    }, 1000);
+};
+
 
 
 updateMoney();
