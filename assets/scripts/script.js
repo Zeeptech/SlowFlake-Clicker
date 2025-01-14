@@ -1,7 +1,6 @@
 let money = 0;
 const displayMoney = document.getElementById("purse");
 const CLICKSPEED = 1;
-const SNOWFALLAMOUNT = 50; 
 let moneyPerClick = 1;
 
 
@@ -44,16 +43,14 @@ class ClickerType {
     }
 }
 
-
-
 //Array med Vilka typer av autoclicker du kan köpa
 const ClickerTypes = [
-    new ClickerType("Pointer", 0, 50, 2.5, "upgrade", "assets/img/pointer.svg"),
-    new ClickerType("Snow mittens", .3, 10, 1.4, "auto", "assets/img/mitten.svg"),
-    new ClickerType("Shovel", 1, 40, 1.5, "auto", "assets/img/shovel.svg"),
-    new ClickerType("Snow Mobile", 3, 500, 1.6, "auto", "assets/img/snowmobile.svg"),
-    new ClickerType("Snow Santas Sleigh", 40, 8000, 1.8, "auto", "assets/img/sleigh.svg"),
-    new ClickerType("Santa Clause", 100, 1000000, 2, "auto", "assets/img/santa.svg")
+    new ClickerType("Pekare", 0, 50, 2.5, "upgrade", "assets/img/pointer.svg"),
+    new ClickerType("Tummhandskar", .3, 10, 1.4, "auto", "assets/img/mitten.svg"),
+    new ClickerType("Spade", 1, 40, 1.5, "auto", "assets/img/shovel.svg"),
+    new ClickerType("Snöskoter", 3, 500, 1.6, "auto", "assets/img/snowmobile.svg"),
+    new ClickerType("Tomtens Släde", 40, 8000, 1.8, "auto", "assets/img/sleigh.svg"),
+    new ClickerType("Jultomten", 100, 1000000, 2, "auto", "assets/img/santa.svg")
     ];
 
 
@@ -68,10 +65,10 @@ function buyUpgradeClick(typeIndex){
         
         updateStorage(type);
         updateMoney();
-        console.log(`Upgraded ${type.name} ${type.owned} times`);
+        console.log(`Uppgraderade ${type.name} ${type.owned} gånger`);
 
         } else {
-        console.log("Not enough money to buy this Upgrade!.");
+        console.log("Du har inte tillräckligt med pengar för detta köp!.");
     }
 };
 
@@ -87,10 +84,10 @@ function buyAutoClicker(typeIndex) {
         
         updateStorage(type);
         updateMoney();
-        console.log(`Bought a ${type.name} Owned: ${type.owned}`);
+        console.log(`Du har köpt en ${type.name} Du har: ${type.owned}`);
 
         } else {
-        console.log("Not enough money to buy this Upgrade!.");
+        console.log("Du har inte tillräckligt med pengar för detta köp!.");
     }
   };
 
@@ -111,7 +108,7 @@ function generateButton(type, index){
     button.className = "button"; 
     button.style.userSelect = "none"
     icon.style.pointerEvents = "none";
-    text.innerText = `Buy ${type.name}:`; 
+    text.innerText = `Köp ${type.name}:`; 
     price.innerText = `${type.getPrice().toLocaleString("en-US")}`;
 
     button.addEventListener("click", () => {
@@ -138,8 +135,6 @@ function generateButton(type, index){
 ClickerTypes.forEach((type, index) => {
     generateButton(type, index, buyAutoClicker)
 });
-
-
 
 // Innehav av autoclickers
 function updateStorage(type){
@@ -169,82 +164,6 @@ function updateStorage(type){
 
 };
 
-function createFloatingText(text, x, y){
-    const floatingText = document.createElement("div");
 
-    floatingText.innerText = `+${text}`;
-    floatingText.style.position = "absolute";
-    floatingText.style.left = `${x}px`;
-    floatingText.style.top = `${y-20}px`;
-    floatingText.style.fontSize = "16px";
-    floatingText.style.fontWeight = "bold";
-    floatingText.style.color = "white";
-    floatingText.style.textShadow = "0 0 5px black";
-    floatingText.style.pointerEvents = "none";
-    floatingText.style.opacity = "1";
-    floatingText.style.transition = "transform 1s ease-out, opacity 1s ease-out";
-
-    document.body.appendChild(floatingText);
-
-    // Vänta en liten stund och animera
-    setTimeout(() => {
-        floatingText.style.transform = "translateY(-50px)";
-        floatingText.style.opacity = "0";
-    }, 10);
-
-    // Ta bort texten efter animationen
-    setTimeout(() => {
-        floatingText.remove();
-    }, 1000);
-};
-
-function createSnowFall(){
-    const snowFall = document.createElement("img");
-    const snowFallContainer = document.getElementById("snowFallContainer");
-
-    const snowFlakes = [
-        "assets/img/snowflake1.svg",
-        "assets/img/snowflake2.svg",
-        "assets/img/snowflake3.svg"
-    ];
-    const randomIndex = Math.floor(Math.random(1) *snowFlakes.length);
-    const randomSize = Math.random() * 20 + 10; 
-    const randomX = Math.floor(Math.random() * snowFallContainer.offsetWidth) - randomSize;
-    const fallDuration = Math.random() * 10 + 5;
-
-    snowFall.src = snowFlakes[randomIndex];
-    snowFall.style.position = "absolute";
-    snowFall.style.left =`${randomX}px`;
-    snowFall.style.top = `10px`;
-    snowFall.style.height = `${randomSize}px`;
-    snowFall.style.width = `${randomSize}px`
-    snowFall.style.pointerEvents ="none";
-    snowFall.style.transition = `transform ${fallDuration}s linear, opacity ${fallDuration}s ease-out`;
-
-    snowFallContainer.appendChild(snowFall);
-
-    console.log(randomIndex);
-    console.log(randomX);
-    
-    setTimeout(() => {
-        snowFall.style.transform = `translateY(${window.innerHeight - 10}px)`; // Falla utanför skärmen
-        snowFall.style.opacity = "0";
-    }, 10);
-
-    // Ta bort snöflingan från DOM när animationen är klar
-    setTimeout(() => {
-        createSnowFall();
-        snowFall.remove();
-    }, fallDuration * 1000);
-
-}
-// Testar snöfall 
-for (let i = 0; i < SNOWFALLAMOUNT; i++) {
-    
-    setTimeout( ()=>{
-        createSnowFall();
-    }, i*520);
-    
-};
 
 updateMoney();
