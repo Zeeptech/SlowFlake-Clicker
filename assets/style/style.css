@@ -24,25 +24,21 @@ body{
     --text-secundary: rgb(252, 252, 252);
 
     /*Grupp med variablar för färgsättning av "Foreground"*/
-    --fg-primary: ;
+    --fg-primary: linear-gradient(to bottom right,rgb(86, 223, 233), rgb(2, 92, 119));
     --fg-primary-hover: ;
     --fg-primary-active: ;
 
     /* Foreground Secundary */
-    --fg-secundary: rgb(143, 216, 245);
+    --fg-secundary: rgba(255,255,255,0.65);
     --fg-secundary-hover:rgb(107, 162, 184) ; 
     --fg-secundary-active:rgb(57, 87, 99) ;
-
-     /* Clicker */
-    --fg-clicker: ;
-    --fg-clicker-hover: ;
-    --fg-clicker-active: ;
 
     /*Grupp med variablar för färgsättning av "Background"*/
     --bg-primary: url("../img/wood.webp");
     --bg-secundary: url("../img/wonderland.webp");
 
 }
+
 #wrapper{
     height: 100%;
     display: flex;
@@ -53,6 +49,7 @@ body{
     grid-template-rows: auto 1fr auto;
     justify-content: center;
 }
+
 #clicker-wrapper{
     grid-area:  clck;
     display: grid;
@@ -85,14 +82,14 @@ body{
     transform: scale(0.95);
 }
 
-/* Förråd*/
+/* Förråd visar hur mycket pengar användaren har, samt visar antalet på varje uppgradering hen har.*/
 #inventory{
     display: flex;
     width: 100%;
     justify-content: space-between;
-    color: var(--text-secundary);
+    color: var(--text-primary);
 
-    background-image: linear-gradient(to bottom right, rgb(2, 92, 119), rgb(19, 19, 19)) ;
+    background-image: var(--fg-primary);
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -103,19 +100,24 @@ body{
     font-weight: bolder;
     
 }
+
+/* Pengar */
 #purse{
     margin-left: 10px;
-    
     user-select: none;
 
 }
+
+/* Förråd för uppgraderingar */
 #storage{
     display: flex;
-
+    margin-left: 10px;
     gap: 10px;
     grid-area: stor;
     user-select: none;
 }
+
+
 
 /* Butiksdelen */
 #store{
@@ -136,30 +138,44 @@ body{
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 7px;
+
     
+}
+#store p{
+    position: fixed;
+    color: var(--text-secundary);
+    padding-left: 10px;
+    left: 0;
+    top: 97%;
 }
 
 .button {
+    color: var(--text-primary);
     display: flex;
     justify-content: start;
     font-size: large;
     gap: 10px;
     flex-direction: row-reverse;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: var(--fg-secundary) ;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
+    background-image: var(--fg-primary);
+    padding: 15px;
+    box-shadow: 0px 5px 3px 5px rgba(0, 0, 0, 0.274);
+    transition: all ease-in-out 50ms;
+    
 }
 .button:hover {
  cursor: pointer;
- background-color: var(--fg-secundary-hover);
+ filter: brightness(.8);
 }
 .button:active{
-    background-color: var(--fg-secundary-active);
+    filter: brightness(.6);
+}
+.button:nth-child(2){
+    border-radius: 50px 0 0 50px;
+}
+.button:last-child{
+    border-radius: 0 50px 50px 0;
 }
 .button img{
     height: 70px;
@@ -177,8 +193,16 @@ body{
         height: auto;
         
     }
+}
+
+@media (max-width:1500px) {
+
+    .button, .button:nth-child(2) , .button:last-child{
+        border-radius: 50px;
+    }
 
 }
+
 
 @media (max-width:750px) {
     #inventory{

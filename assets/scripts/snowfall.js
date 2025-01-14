@@ -1,3 +1,7 @@
+/*
+    Ett program som skapar ett snöfall där snöflingorna har 3st olika modeller och skapas i random storlek.
+    Snöflingorna hamnar på en slumpmässig plats på X-axeln. 
+*/
 const SNOWFALLAMOUNT = 50;
 
 function createSnowFall(){
@@ -9,8 +13,8 @@ function createSnowFall(){
         "assets/img/snowflake2.svg",
         "assets/img/snowflake3.svg"
     ];
-    
-    const randomIndex = Math.floor(Math.random(1) *snowFlakes.length);
+
+    const randomIndex = Math.floor(Math.random(1) * snowFlakes.length);
     const randomSize = Math.random() * 20 + 10; 
     const randomX = Math.floor(Math.random() * snowFallContainer.offsetWidth) - randomSize;
     const fallDuration = Math.random() * 10 + 5;
@@ -25,9 +29,6 @@ function createSnowFall(){
     snowFall.style.transition = `transform ${fallDuration}s linear, opacity ${fallDuration}s ease-out`;
 
     snowFallContainer.appendChild(snowFall);
-
-    console.log(randomIndex);
-    console.log(randomX);
     
     setTimeout(() => {
         snowFall.style.transform = `translateY(${window.innerHeight - 10}px)`;
@@ -41,6 +42,7 @@ function createSnowFall(){
     }, fallDuration * 1000);
 
 }
+
 // Startar passivt snöfall som spawnar antalet flingor som vi bestämt. 
 for (let i = 0; i < SNOWFALLAMOUNT; i++) {
     

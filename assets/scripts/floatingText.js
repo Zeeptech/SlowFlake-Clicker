@@ -1,4 +1,6 @@
-
+/*
+    Skapar en text varje gång
+*/
 function createFloatingText(text, x, y){
     const floatingText = document.createElement("div");
 
@@ -27,3 +29,5 @@ function createFloatingText(text, x, y){
         floatingText.remove();
     }, 1000);
 };
+
+export default createFloatingText;

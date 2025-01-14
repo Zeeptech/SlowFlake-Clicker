@@ -1,8 +1,16 @@
+/*
+    Felix Bardén. "Snowflake Clicker" är ett spel där användaren klickar på snöflingan för att generera pengar.
+    Med dessa pengar kan användaren köpa uppgraderingar som hjälper användaren att klicka automatiskt.
+    Användaren kan också uppgradera hur mycket pengar varje manuellt klick genererar. 
+*/
+
+import createFloatingText from "./floatingText.js";
+
 let money = 0;
-const displayMoney = document.getElementById("purse");
 const CLICKSPEED = 1;
 let moneyPerClick = 1;
 
+const displayMoney = document.getElementById("purse");
 
 // Clicker-Element
 const clicker = document.getElementById("clicker-object");
@@ -10,12 +18,11 @@ const clicker = document.getElementById("clicker-object");
 clicker.addEventListener("click", (event) => {
     money+= moneyPerClick;
     createFloatingText(moneyPerClick, event.clientX, event.clientY);
-    createSnowFall();
     updateMoney();
 });
 
 function updateMoney(){
-    displayMoney.innerHTML = `Money: ${parseFloat(money.toFixed(1)).toLocaleString("en-US")}`
+    displayMoney.innerHTML = `Pengar: ${parseFloat(money.toFixed(1)).toLocaleString("en-US")}`
 };
 
 
@@ -95,6 +102,8 @@ function buyAutoClicker(typeIndex) {
 // Butik för Autoklickers
 const store = document.getElementById("store");
 
+
+// Genererar Köp-knappar automatiskt beroende på hur många knappar vi har i arrayen.
 function generateButton(type, index){
 
     const button = document.createElement("div");
@@ -102,7 +111,6 @@ function generateButton(type, index){
     const textWrapper = document.createElement("span");
     textWrapper.display = "grid";
     const text = document.createElement("div");
-
     const price = document.createElement("div");
     icon.src = type.icon;
     button.className = "button"; 
@@ -155,15 +163,14 @@ function updateStorage(type){
         storageItem.appendChild(icon);
         storageItem.appendChild(text);
         storage.appendChild(storageItem);
+
     } else {
         const count = storageItem.querySelector("span");
         if (count) {
             count.innerText = `x${type.owned}`;
         }
     };
-
 };
 
-
-
+// Börja med att uppdatera Pengar så vi faktist får text
 updateMoney();
