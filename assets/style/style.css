@@ -4,17 +4,19 @@
     margin: 0;
     padding: 0;
 }
+
 html{
     height: 100vh;
-    
     background-image: var(--bg-secundary);
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 body{
     
     height: 100%;
 }
+
 /* Jag har valt att använda mig av :root för att enklare ge mig kontrollen att ändra färger om jag under kodandets gång märker att det inte blev snyggt
     Dessutom slipper jag reppetera mig med samma färgkod om och om igen då jag endast behöver ge attributet en gång dvs --bg-primary.
 */
@@ -25,8 +27,6 @@ body{
 
     /*Grupp med variablar för färgsättning av "Foreground"*/
     --fg-primary: linear-gradient(to bottom right,rgb(86, 223, 233), rgb(2, 92, 119));
-    --fg-primary-hover: ;
-    --fg-primary-active: ;
 
     /* Foreground Secundary */
     --fg-secundary: rgba(255,255,255,0.65);
@@ -142,6 +142,8 @@ body{
 
     
 }
+
+/* Vattenstämpel */
 #store p{
     position: fixed;
     color: var(--text-secundary);
@@ -150,6 +152,7 @@ body{
     top: 97%;
 }
 
+/* Style för affärs-knapparna*/
 .button {
     color: var(--text-primary);
     display: flex;
@@ -181,6 +184,7 @@ body{
     height: 70px;
 }
 
+/* Mediaqueries */
 @media (max-width:1920px) {
     #clicker-object{
         width: 420px;

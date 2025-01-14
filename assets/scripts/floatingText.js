@@ -1,5 +1,6 @@
 /*
-    Skapar en text varje gång
+    Skapar en text varje gång användaren klickar på snöflingan. Texten visar hur mycket pengar varje klick genererar.
+    Detta för att skapa en mer interaktiv upplevelse.
 */
 function createFloatingText(text, x, y){
     const floatingText = document.createElement("div");
