@@ -2,6 +2,8 @@
     Ett program som skapar ett snöfall där snöflingorna har 3st olika modeller och skapas i random storlek.
     Snöflingorna hamnar på en slumpmässig plats på X-axeln. 
 */
+
+// Ändrar hur många snöflingor som får vara på skärmen samtidigt.
 const SNOWFALLAMOUNT = 50;
 
 function createSnowFall(){
