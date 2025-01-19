@@ -188,7 +188,6 @@ body{
 /* Mediaqueries */
 @media (max-width:1920px) {
     #clicker-object{
-        width: 420px;
         margin-top: unset;
         margin-bottom: unset;
         
@@ -201,6 +200,10 @@ body{
 }
 
 @media (max-width:1500px) {
+    #clicker-object{
+        width: 400px;
+        
+    }
 
     .button, .button:nth-child(2) , .button:last-child{
         border-radius: 50px;
