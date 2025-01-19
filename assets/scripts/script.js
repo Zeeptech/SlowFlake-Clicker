@@ -3,16 +3,16 @@
     Med dessa pengar kan användaren köpa uppgraderingar som hjälper användaren att klicka automatiskt.
     Användaren kan också uppgradera hur mycket pengar varje manuellt klick genererar. 
 */
-
+// Importerar createFloatingText
 import createFloatingText from "./floatingText.js";
 
+// Globala Variablar
 let money = 0;
-const CLICKSPEED = 1;
+const CLICKSPEED = 1000;
 let moneyPerClick = 1;
-
 const displayMoney = document.getElementById("purse");
 
-// Clicker-Element
+// Clicker-Elementet
 const clicker = document.getElementById("clicker-object");
 
 clicker.addEventListener("click", (event) => {
@@ -25,7 +25,7 @@ function updateMoney(){
     displayMoney.innerHTML = `Pengar: ${parseFloat(money.toFixed(1)).toLocaleString("en-US")}`
 };
 
-
+// Skapar klassen för vilken typ av uppgradering man kan köpa.
 class ClickerType {
     constructor(name, clicksPerSec, basePrice, multiplier, onClick, icon) {
         this.name = name; 
@@ -48,9 +48,9 @@ class ClickerType {
         updateMoney();
         }, CLICKSPEED);
     }
-}
+};
 
-//Array med Vilka typer av autoclicker du kan köpa
+//Array med Vilka typer av autoclicker du kan köpa, Här lägger vi till nya klickers.
 const ClickerTypes = [
     new ClickerType("Pekare", 0, 50, 2.5, "upgrade", "assets/img/pointer.svg"),
     new ClickerType("Tummhandskar", .3, 10, 1.4, "auto", "assets/img/mitten.svg"),
@@ -61,6 +61,7 @@ const ClickerTypes = [
     ];
 
 
+// Köpa upgradering eller autoklick
 function buyUpgradeClick(typeIndex){
     const type = ClickerTypes[typeIndex];
     const price = type.getPrice();
@@ -102,7 +103,6 @@ function buyAutoClicker(typeIndex) {
 // Butik för Autoklickers
 const store = document.getElementById("store");
 
-
 // Genererar Köp-knappar automatiskt beroende på hur många knappar vi har i arrayen.
 function generateButton(type, index){
 
@@ -139,12 +139,12 @@ function generateButton(type, index){
 
     store.appendChild(button);
 };
-
+// Genererar varje knapp som ligger i arrayen.
 ClickerTypes.forEach((type, index) => {
     generateButton(type, index, buyAutoClicker)
 });
 
-// Innehav av autoclickers
+// Innehav av autoclickers. OM du inte har föremålet så skapas den i ditt förråd. annars uppdaterar vi bara antalet.
 function updateStorage(type){
     const storage = document.getElementById("storage");
     let storageItem = document.getElementById(`${type.name}`);

@@ -25,10 +25,11 @@ function createFloatingText(text, x, y){
         floatingText.style.opacity = "0";
     }, 10);
 
-    // Ta bort texten efter animationen
+    // Ta bort texten efter att animationen är klar
     setTimeout(() => {
         floatingText.remove();
     }, 1000);
 };
 
+// Exportar funktionen så den kan användas i script.js
 export default createFloatingText;
