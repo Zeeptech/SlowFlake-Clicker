@@ -4,11 +4,11 @@
     Användaren kan också uppgradera hur mycket pengar varje manuellt klick genererar. 
 */
 // Importerar createFloatingText
-import createFloatingText from "./floatingText.js";
+// import createFloatingText from "./floatingText.js";
 
 // Globala Variablar
 let money = 0;
-const CLICKSPEED = 1000;
+const CLICKSPEED = 1;
 let moneyPerClick = 1;
 const displayMoney = document.getElementById("purse");
 
@@ -52,12 +52,12 @@ class ClickerType {
 
 //Array med Vilka typer av autoclicker du kan köpa, Här lägger vi till nya klickers.
 const ClickerTypes = [
-    new ClickerType("Pekare", 0, 50, 2.5, "upgrade", "assets/img/pointer.svg"),
-    new ClickerType("Tummhandskar", .3, 10, 1.4, "auto", "assets/img/mitten.svg"),
-    new ClickerType("Spade", 1, 40, 1.5, "auto", "assets/img/shovel.svg"),
-    new ClickerType("Snöskoter", 3, 500, 1.6, "auto", "assets/img/snowmobile.svg"),
-    new ClickerType("Tomtens Släde", 40, 8000, 1.8, "auto", "assets/img/sleigh.svg"),
-    new ClickerType("Jultomten", 100, 1000000, 2, "auto", "assets/img/santa.svg")
+    new ClickerType("Pekare", 0, 50, 2.5, "upgrade", "./assets/img/pointer.svg"),
+    new ClickerType("Tummvante", .3, 10, 1.4, "auto", "./assets/img/mitten.svg"),
+    new ClickerType("Spade", 1, 40, 1.5, "auto", "./assets/img/shovel.svg"),
+    new ClickerType("Snöskoter", 3, 500, 1.6, "auto", "./assets/img/snowmobile.svg"),
+    new ClickerType("Tomtens Släde", 40, 8000, 1.8, "auto", "./assets/img/sleigh.svg"),
+    new ClickerType("Jultomten", 100, 1000000, 2, "auto", "./assets/img/santa.svg")
     ];
 
 
@@ -139,6 +139,7 @@ function generateButton(type, index){
 
     store.appendChild(button);
 };
+
 // Genererar varje knapp som ligger i arrayen.
 ClickerTypes.forEach((type, index) => {
     generateButton(type, index, buyAutoClicker)
@@ -170,6 +171,40 @@ function updateStorage(type){
             count.innerText = `x${type.owned}`;
         }
     };
+};
+
+
+/*
+    Skapar en text varje gång användaren klickar på snöflingan. Texten visar hur mycket pengar varje klick genererar.
+    Detta för att skapa en mer interaktiv upplevelse.
+*/
+function createFloatingText(text, x, y){
+    const floatingText = document.createElement("div");
+
+    floatingText.innerText = `+${text}`;
+    floatingText.style.position = "absolute";
+    floatingText.style.left = `${x}px`;
+    floatingText.style.top = `${y-20}px`;
+    floatingText.style.fontSize = "16px";
+    floatingText.style.fontWeight = "bold";
+    floatingText.style.color = "white";
+    floatingText.style.textShadow = "0 0 5px black";
+    floatingText.style.pointerEvents = "none";
+    floatingText.style.opacity = "1";
+    floatingText.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+
+    document.body.appendChild(floatingText);
+
+    // Vänta en liten stund och animera
+    setTimeout(() => {
+        floatingText.style.transform = "translateY(-50px)";
+        floatingText.style.opacity = "0";
+    }, 10);
+
+    // Ta bort texten efter att animationen är klar
+    setTimeout(() => {
+        floatingText.remove();
+    }, 1000);
 };
 
 // Börja med att uppdatera Pengar så vi faktist får text
