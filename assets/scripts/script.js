@@ -8,7 +8,7 @@
 
 // Globala Variablar
 let money = 0;
-const CLICKSPEED = 1;
+const CLICKSPEED = 1000;
 let moneyPerClick = 1;
 const displayMoney = document.getElementById("purse");
 
@@ -55,9 +55,9 @@ const ClickerTypes = [
     new ClickerType("Pekare", 0, 50, 2.5, "upgrade", "./assets/img/pointer.svg"),
     new ClickerType("Tummvante", .3, 10, 1.4, "auto", "./assets/img/mitten.svg"),
     new ClickerType("Spade", 1, 40, 1.5, "auto", "./assets/img/shovel.svg"),
-    new ClickerType("Snöskoter", 3, 500, 1.6, "auto", "./assets/img/snowmobile.svg"),
-    new ClickerType("Tomtens Släde", 40, 8000, 1.8, "auto", "./assets/img/sleigh.svg"),
-    new ClickerType("Jultomten", 100, 1000000, 2, "auto", "./assets/img/santa.svg")
+    new ClickerType("Snöskoter", 30, 500, 1.6, "auto", "./assets/img/snowmobile.svg"),
+    new ClickerType("Tomtens Släde", 80, 8000, 1.8, "auto", "./assets/img/sleigh.svg"),
+    new ClickerType("Jultomten", 1500, 1000000, 2, "auto", "./assets/img/santa.svg")
     ];
 
 
