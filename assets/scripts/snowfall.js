@@ -11,9 +11,9 @@ function createSnowFall(){
     const snowFallContainer = document.getElementById("snowFallContainer");
 
     const snowFlakes = [
-        "assets/img/snowflake1.svg",
-        "assets/img/snowflake2.svg",
-        "assets/img/snowflake3.svg"
+        "./assets/img/snowflake1.svg",
+        "./assets/img/snowflake2.svg",
+        "./assets/img/snowflake3.svg"
     ];
 
     const randomIndex = Math.floor(Math.random(1) * snowFlakes.length);
